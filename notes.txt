@@ -1,0 +1,50 @@
+Installing Developer Libraries on Windows. For beginners. How and Why.
+
+***Disclaimer: I'm no expert, just a soul whose intentions are good. If you see something wrong, please inform me and I'll correct it.
+
+***Notes: Have a 'i dont care just show me how to install this shit button'. An intro to compilers, linkers, and loaders, and standard libraries.
+
+** environment variables and path
+
+***MinGW vs Cygwin vs Visual C++ vs Clang
+
+** Visual C++ compilers and versions
+
+** 32bit vs 64bit, Debug vs Release
+
+** SDK vs library vs framework?
+
+** Visual studio solutions vs projects, example multi-project solution
+
+** header file extensions: .hh, .hpp, .h
+
+** Follow up: [http://en.wikipedia.org/wiki/Standard_library],[http://en.wikipedia.org/wiki/Programming_language_specification]
+
+If you're like me, you've probably spent too much time setting up developer libraries and too little time actually using them. This tutorial will explain the hows and whys of installing and configuring develepor libraries on Windows, specifically for Visual Studio C++ projects. I'll show the steps involved to get three libraries I have used - SDL, OpenCV, and SFML - up and running. You'll learn about environment variables, .lib and .dll files, headers, and what all those obscure instructions you blindly follow actually do. My hope is to integrate theory and practice you'll learn something and save yourself time in the future.
+
+
+So, what's a library? Let's ask Wikipedia [http://en.wikipedia.org/wiki/Library_%28computing%29]. If you're serious about software development, I highly recommend reading through the whole article.
+
+"In computer science, a library is a collection of implementations of behavior, written in terms of a language, that has a well-defined interface by which the behavior is invoked. This means that as long as a higher level program uses a library to make system calls, it does not need to be re-written to implement those system calls over and over again. In addition, the behavior is provided for reuse by multiple independent programs. A program invokes the library-provided behavior via a mechanism of the language. For example, in a simple imperative language such as C, the behavior in a library is invoked by using C's normal function-call. What distinguishes the call as being to a library, versus being to another function in the same program, is the way that the code is organized in the system. Library code is organized in such a way that it can be used by multiple programs that have no connection to each other, while code that is part of a program is organized to only be used within that one program."
+
+In short, a library is a collection of functions organized to be used by other programs. 
+
+
+
+
+I'll start with SDL, which is "a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D." SDL is written in C but works natively with C++. So, we'll set it up in Visual Studio.
+
+
+
+
+Static vs Dynamic Libraries.
+
+
+
+Steps
+1. Go to downloads page
+2. Download appropriate package
+3. Unarchive (unzip)
+4. Tell compiler where to find headers
+5. Tell linker where to find libraries
+6. If dynamically linking make DLLs available (either place in .exe directory or add to path)
