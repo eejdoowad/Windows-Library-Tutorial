@@ -4,23 +4,35 @@ Installing Developer Libraries on Windows. For beginners. How and Why.
 
 ***Notes: Have a 'i dont care just show me how to install this shit button'. An intro to compilers, linkers, and loaders, and standard libraries.
 
+** make (and use) your own library example
+
 ** environment variables and path
 
 ***MinGW vs Cygwin vs Visual C++ vs Clang
 
-** Visual C++ compilers and versions
+** Visual C++ compilers and versions, C++ ABIs
 
 ** 32bit vs 64bit, Debug vs Release
 
-** SDK vs library vs framework?
+** SDK vs library vs framework vs executable
 
 ** Visual studio solutions vs projects, example multi-project solution
 
 ** header file extensions: .hh, .hpp, .h
 
+** Compilers -> Assembly -> Assemblers -> Object Code -> Linker -> executable or library
+
+** Make a mention of Visual C++ redistributable package installers you see with videogames. "The Visual C++ compiler ABI have historically changed between major compiler releases.[38] This is especially the case for STL containers, where container sizes have varied a lot between compiler releases." [http://en.wikipedia.org/wiki/Visual_C%2B%2B]
+
 ** Follow up: [http://en.wikipedia.org/wiki/Standard_library],[http://en.wikipedia.org/wiki/Programming_language_specification]
 
-If you're like me, you've probably spent too much time setting up developer libraries and too little time actually using them. This tutorial will explain the hows and whys of installing and configuring develepor libraries on Windows, specifically for Visual Studio C++ projects. I'll show the steps involved to get three libraries I have used - SDL, OpenCV, and SFML - up and running. You'll learn about environment variables, .lib and .dll files, headers, and what all those obscure instructions you blindly follow actually do. My hope is to integrate theory and practice you'll learn something and save yourself time in the future.
+If you're like me, you've probably spent too much time setting up developer libraries and too little time actually using them. This tutorial will explain the hows and whys of installing and configuring develepor libraries on Windows, specifically for Visual Studio C++ projects. I'll show the steps involved to get three libraries I have used - SDL, SFML, OpenCV and Boost - up and running. You'll learn about environment variables, .lib and .dll files, headers, and what all those obscure instructions you blindly follow actually do. My hope is to integrate theory and practice so you'll learn something and save yourself time in the future.
+
+Before discussing libraries and installation procedures, lets talk about your development toolchain. In this case, I'm using:
+1. Windows (8.1 Ultimate 64bit in my case) - this is the operating system that everything runs on. Operating systems manage hardware and software resources and provide an environment on which user applications can run.
+2. Visual Studio 2013 Community Edition - this is your IDE "Integrated Development Environment." IDEs are programs that provide tools needed to develope software. They usually include text editors, automated build tools, and debuggers. Visual Studio also includes compilers for various programs that turn the code you write into a representation your computer can process.
+	a. Visual C++ compiler - A C++ compiler.
+	b. 
 
 
 So, what's a library? Let's ask Wikipedia [http://en.wikipedia.org/wiki/Library_%28computing%29]. If you're serious about software development, I highly recommend reading through the whole article.
@@ -44,7 +56,22 @@ Static vs Dynamic Libraries.
 Steps
 1. Go to downloads page
 2. Download appropriate package
+~. If no appropriate package/only source code... compile it yourself
 3. Unarchive (unzip)
-4. Tell compiler where to find headers
-5. Tell linker where to find libraries
-6. If dynamically linking make DLLs available (either place in .exe directory or add to path)
+~. Be sure to select Configuration (Debug/Release/Both)
+4. Tell compiler where to find headers. "C/C++ >> General >> Additional Include Directories"
+5. Tell linker where to find libraries. "Linker >> General >> Additional Library Directories"
+5b. Specify specific .lib files to include "Linker >> input >> Additional Dependencies"
+6. If dynamically linking make DLLs available (either place in .exe directory or add to path). Note may have to restart Visual Studio or Computer to detect changed env variables
+~. For SDL You must define an entry point: "Linker >> System >> SubSystem"
+7. Run a sample project. Usually one is provided.
+
+
+** Quirks: SFML is a C++ library... have to link to appropriate compiler... something about ABI differences. SDL is C... any compiler can link to it.
+
+** Figure out why SDL doesn't need different debug/release builds
+
+SDL: Simple, easy C library. Nothing Special. Can statically or dynamically link SDL2.
+SFML: Easy C++ library. Compilers must match. Specify debug/release builds.
+OpenCV: Getting complicated, but process is about the same as SFML.
+Boost: Collection of libraries. For everything. Some libraries are header only. Some aren't.
